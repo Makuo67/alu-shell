@@ -8,10 +8,11 @@ ps > /var/run/myscript.pid
 trap 'echo "I hate the kill command"' SIGTERM
 trap 'echo "Y U no love me?!"' SIGINT
 trap 'rm -f /var/run/myscript.pid' | xargs kill $$ SIGQUIT 
-trap 'rm -f /var/run/myscript.pid' | xargs kill $$ SIGTERM
+trap 'rm -f /var/run/myscript.pid; exit' | xargs kill $$ SIGTERM
 a=1
 while [ $a -ge 1 ]
 do
 echo "To infinity and beyond"
+sleep 5
 ((a++))
 done
